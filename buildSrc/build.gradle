@@ -1,10 +1,10 @@
 apply plugin: 'kotlin'
 
 buildscript {
-    ext.kotlin_version = '1.3.72'
+    ext.kotlin_version = '1.9.22'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -13,16 +13,16 @@ buildscript {
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation('com.android.tools.build:gradle:4.0.0') {
+    // Compile the legacy Transform plugin without replacing the root AGP at runtime.
+    compileOnly('com.android.tools.build:gradle:4.0.0') {
         exclude group: 'org.jetbrains.kotlin'
     }
     implementation gradleApi()
     implementation 'org.javassist:javassist:3.24.0-GA'
-    implementation "com.iwhys.classeditor:domain:1.1.0"
 }

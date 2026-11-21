@@ -2,13 +2,16 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    namespace 'com.iwhys.library_fix'
+    compileSdkVersion 34
+    compileOptions { sourceCompatibility JavaVersion.VERSION_11; targetCompatibility JavaVersion.VERSION_11 }
+    kotlinOptions { jvmTarget = '11' }
 
 
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
 
@@ -62,6 +65,7 @@ dependencies {
     }
     implementation('com.facebook.android:audience-network-sdk:4.23.0') {
         exclude group: 'com.android.support'
+        // The historical ExoPlayer artifact is unavailable; runtime playback is unverified.
+        exclude group: 'com.google.android.exoplayer', module: 'exoplayer'
     }
-    implementation 'com.iwhys.classeditor:domain:1.1.0'
 }
